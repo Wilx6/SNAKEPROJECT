@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SnakeMovement : MonoBehaviour
 {
     //variables
@@ -76,7 +77,12 @@ public class SnakeMovement : MonoBehaviour
     {
         if (other.tag == "Food")
         {
-
+            Grow();
+        }
+        else if (other.tag == "Lose")
+        {
+            Debug.Log("Hit");
+            
         }
     }
 }
