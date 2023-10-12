@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class SnakeMovement : MonoBehaviour
@@ -50,17 +51,19 @@ public class SnakeMovement : MonoBehaviour
     //FixedUpdate is called at a fix interval
     void FixedUpdate()
     {
+
+        for (int i = segments.Count - 1; i > 0; i--)
+        {
+            segments[i].position = segments[i - 1].position;
+        }
+
         //move the snake
         this.transform.position = new Vector2(                          //get the position
             Mathf.Round(this.transform.position.x) + direction.x,       //round the number add value to X
             Mathf.Round(this.transform.position.y) + direction.y        //round the number add value to Y
             );
 
-        //move to body of the snake
-        for (int i = segments.Count - 1; i > 0; i--)                    //for each segment of the snake
-        {
-            segments[i].position = segments[i - 1].position;            //move the body
-        }
+     
 
 
     }
@@ -82,7 +85,7 @@ public class SnakeMovement : MonoBehaviour
         else if (other.tag == "Lose")
         {
             Debug.Log("Hit");
-            
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
